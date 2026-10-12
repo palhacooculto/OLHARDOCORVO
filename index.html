@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Olhar do Corvo</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="E-book com 30 pinturas famosas explicadas sem palavras difíceis: a história por trás de cada obra e os detalhes escondidos, apontados um por um.">
+<meta property="og:title" content="O Olhar do Corvo">
+<meta property="og:description" content="30 pinturas intrigantes e os segredos que quase ninguém vê.">
+<meta property="og:image" content="img/capa.jpg">
+<link rel="preload" href="fonts/Texturina-VF.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+@font-face{font-family:'Titulo';src:url('fonts/Texturina-VF.ttf');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Corpo';src:url('fonts/Inter-VF.ttf');font-weight:100 900;font-display:swap}
+:root{--bg:#0f0c0c;--bg2:#161212;--ink:#ece3d6;--soft:#bdb2a6;--mut:#857a70;--line:#2a2322;--red:#c42020;--red2:#e0453a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Corpo',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.w{width:min(1120px,100% - 48px);margin:0 auto}
+h1,h2,.serif{font-family:'Titulo',Georgia,serif;font-weight:600;line-height:1.08;letter-spacing:-.01em}
+.k{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--red2);font-weight:600}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:16px 30px;border-radius:2px;transition:background .15s}
+.btn:hover{background:#a51a1a}
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::after{content:'';position:absolute;top:-20%;bottom:-20%;left:0;width:38%;z-index:-1;pointer-events:none;
+ background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.08) 30%,rgba(255,240,225,.75) 50%,rgba(255,255,255,.08) 70%,transparent 100%);
+ transform:translateX(-160%) skewX(-18deg)}
+/* feixe de luz: só passa quando o mouse entra no botão (ou ao focar pelo teclado), devagar */
+.btn:hover::after,.btn:focus-visible::after{animation:feixe 1.4s ease-in-out}
+@keyframes feixe{0%{transform:translateX(-160%) skewX(-18deg)}100%{transform:translateX(420%) skewX(-18deg)}}.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.nota{font-size:14px;color:var(--mut);margin-top:12px}
+section{padding:110px 0;border-top:1px solid var(--line)}
+
+/* topo */
+.topo{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.topo .marca{font-family:'Titulo';font-size:20px;font-weight:600;text-decoration:none}
+.topo a.lk{font-size:14px;color:var(--soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+.topo a.lk:hover{color:var(--ink);border-color:var(--red)}
+
+/* abertura */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:72px;align-items:center;padding:56px 0 110px}
+.hero h1{font-size:clamp(40px,5.4vw,66px);margin:18px 0 22px}
+.hero p.l{font-size:19px;color:var(--soft);max-width:30em;margin-bottom:34px}
+.hero .capa{justify-self:end;width:100%;height:auto;max-width:400px;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.fatos{display:flex;gap:28px;margin-top:40px;font-size:14px;color:var(--mut)}
+.fatos b{display:block;font-family:'Titulo';font-size:26px;color:var(--ink);font-weight:600;line-height:1.1}
+
+/* olhe de perto */
+.cab2{max-width:640px;margin-bottom:40px}
+.cab2 h2{font-size:clamp(32px,4vw,46px);margin:12px 0 14px}
+.cab2 p{color:var(--soft)}
+.abas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.aba{font:inherit;font-size:14px;background:none;color:var(--soft);border:1px solid var(--line);padding:9px 16px;cursor:pointer;border-radius:2px}
+.aba[aria-selected=true]{color:var(--ink);border-color:var(--red)}
+.aba:hover{color:var(--ink)}
+.perto{display:grid;grid-template-columns:1.45fr 1fr;gap:36px;align-items:start}
+.quadro{position:relative;background:#000;line-height:0;overflow:hidden}
+.quadro img{width:100%;height:auto}
+.caixa{position:absolute;border:2px solid var(--red2);box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 0 9999px rgba(0,0,0,.42);pointer-events:none;transition:all .35s ease}
+.pt{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:rgba(15,12,12,.85);border:1.5px solid var(--red2);color:#fff;font:600 13px 'Corpo';display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s,background .15s;line-height:1}
+.pt:hover{transform:scale(1.12)}.pt.on{background:var(--red);border-color:#fff;z-index:2}
+.pt:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.barra-q{display:flex;justify-content:flex-start;margin-bottom:8px}
+.orig{font:600 12px 'Corpo';letter-spacing:.06em;color:var(--ink);background:none;border:1px solid var(--line);padding:9px 13px;border-radius:2px;cursor:pointer;line-height:1;min-height:36px}
+.orig:hover{border-color:var(--soft)}.orig[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}
+.quadro.limpo .pt,.quadro.limpo .caixa{opacity:0;pointer-events:none}
+.pt,.caixa{transition:opacity .25s,transform .15s,background .15s,left .35s,top .35s,width .35s,height .35s}
+.compra .btn{text-transform:uppercase;letter-spacing:.08em;font-size:15px;padding:18px 34px}
+.compra .lin{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:18px 0 4px}
+.compra .preco{font-family:'Titulo';font-weight:700;font-size:44px;line-height:1;color:var(--ink);animation:brilho 3.2s ease-in-out infinite}
+@keyframes brilho{0%,100%{text-shadow:0 0 0 rgba(224,69,58,0)}50%{text-shadow:0 0 14px rgba(224,69,58,.75),0 0 30px rgba(224,69,58,.35)}}
+@keyframes brilho2{0%,100%{text-shadow:0 0 6px rgba(224,69,58,.25)}50%{text-shadow:0 0 18px rgba(224,69,58,.9),0 0 42px rgba(224,69,58,.45)}}
+.compra .parc{font-size:14px;color:var(--soft);margin-top:6px}
+.fim{text-align:center;padding:130px 0 120px}
+.fim h2{font-size:clamp(32px,4.2vw,50px);max-width:16em;margin:0 auto 18px}
+.fim p.l{color:var(--soft);max-width:34em;margin:0 auto 40px}
+.fim .por{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.fim .preco{font-family:'Titulo';font-weight:700;font-size:64px;line-height:1.05;color:var(--red2);margin:6px 0 4px;animation:brilho2 3.2s ease-in-out infinite}
+.fim .parc{font-size:14px;color:var(--soft);margin-bottom:34px}
+.fim .btn{text-transform:uppercase;letter-spacing:.08em;font-size:15px;padding:20px 40px}
+.fim .gar{display:flex;gap:10px;align-items:center;justify-content:center;font-size:14px;color:var(--soft);margin-top:22px}
+.fim .gar svg{flex:none}
+.leg{font-size:13px;color:var(--mut);margin-top:12px;line-height:1.4}
+.painel{border:1px solid var(--line);background:var(--bg2);padding:22px}
+.painel .zoom{width:100%;aspect-ratio:var(--zr,1.25);max-height:380px;object-fit:cover;background:#000}
+.painel .cont{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:20px 0 6px}
+.painel h3{font-family:'Titulo';font-weight:600;font-size:26px;line-height:1.15;margin-bottom:10px}
+.painel p{color:var(--soft);font-size:16px}
+.nav{display:flex;gap:8px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.nav button{font:inherit;font-size:14px;background:none;color:var(--soft);border:1px solid var(--line);width:44px;height:44px;cursor:pointer;border-radius:2px}
+.nav button:hover{color:var(--ink);border-color:var(--soft)}
+.nav span{margin-left:auto;align-self:center;font-size:13px;color:var(--mut)}
+
+/* páginas */
+.pags{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.pags img{width:100%;height:auto;border:1px solid var(--line)}
+.pags figcaption{font-size:14px;color:var(--soft);margin-top:12px;line-height:1.45}
+
+/* lista */
+.dois{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px}
+.lista{list-style:none;columns:2;column-gap:40px}
+.lista li{break-inside:avoid;display:grid;grid-template-columns:32px 1fr;padding:9px 0;border-bottom:1px solid var(--line)}
+.lista .n{color:var(--red2);font-size:13px;font-weight:600;padding-top:2px}
+.lista .t{font-size:15px}.lista .a{grid-column:2;font-size:13px;color:var(--mut)}
+
+/* faq */
+.faq{max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding:20px 0}
+.faq summary{cursor:pointer;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:20px}
+.faq summary::after{content:'+';color:var(--red2);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq summary::-webkit-details-marker{display:none}
+.faq p{color:var(--soft);margin-top:10px;max-width:44em}
+
+/* final */
+.final{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center}
+.final img{width:200px;height:auto;box-shadow:0 20px 40px rgba(0,0,0,.6)}
+.final h2{font-size:clamp(30px,3.6vw,44px);margin-bottom:14px}
+.final p{color:var(--soft);margin-bottom:28px;max-width:34em}
+footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:13px;color:var(--mut)}
+footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:900px){
+ section{padding:76px 0}
+ .hero{grid-template-columns:1fr;gap:44px;padding:28px 0 76px}
+ .hero .capa{justify-self:center;max-width:300px;order:-1}
+ .perto{grid-template-columns:1fr}
+ .pags{grid-template-columns:repeat(2,1fr)}
+ .dois{grid-template-columns:1fr;gap:28px}
+ .final{grid-template-columns:1fr;text-align:left}.final img{width:150px}
+}
+@media (max-width:560px){
+ body{font-size:16px}.w{width:calc(100% - 36px)}
+ .lista{columns:1}
+ .pt{width:28px;height:28px;margin:-14px 0 0 -14px;font-size:12px}
+ .fatos{gap:20px}
+ .btn{display:block;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="w topo"><a class="marca" href="#">O Olhar do Corvo</a><a class="lk" href="https://pay.kiwify.com.br/UFSVO5i">Comprar o e-book</a></div>
+
+<header class="w hero">
+ <div>
+  <h1>Toda pintura famosa esconde alguma coisa.</h1>
+  <p class="l">30 obras explicadas sem palavras difíceis: a história por trás de cada uma e os detalhes que passam batido, apontados um por um.</p>
+  <div class="compra">
+   <a class="btn" href="https://pay.kiwify.com.br/UFSVO5i">Quero O Olhar do Corvo</a>
+   <div class="lin">E-book em PDF · acesso imediato</div>
+   <div class="preco">R$ 27,90</div>
+   <div class="parc">ou 6x de R$ 5,24</div>
+  </div>
+  <div class="fatos"><div><b>30</b>pinturas</div><div><b>372</b>páginas</div><div><b>212</b>detalhes que quase ninguém percebe</div></div>
+ </div>
+ <img class="capa" src="img/capa.jpg" alt="Capa do e-book O Olhar do Corvo" width="900" height="1270">
+</header>
+
+<section id="perto">
+ <div class="w">
+  <div class="cab2">
+   <div class="k">Experimente</div>
+   <h2>Olhe de perto.</h2>
+   <p>Toque nos números. É assim que o livro mostra cada obra: um detalhe de cada vez, com o zoom e a explicação do que está ali.</p>
+  </div>
+  <div class="abas" role="tablist"><button type="button" class="aba" data-o="0" aria-selected="true">Stańczyk</button><button type="button" class="aba" data-o="1" aria-selected="false">Os Jogadores de Xadrez</button><button type="button" class="aba" data-o="2" aria-selected="false">O Anjo Ferido</button></div>
+  <div class="perto">
+   <div>
+    <div class="barra-q"><button type="button" class="orig" id="orig" aria-pressed="false">Ver pintura original</button></div>
+    <div class="quadro" id="quadro"><img id="qimg" src="" alt=""><div class="caixa" id="caixa"></div></div>
+    <p class="leg" id="qleg"></p>
+   </div>
+   <div class="painel" aria-live="polite">
+    <img class="zoom" id="zimg" src="" alt="">
+    <div class="cont" id="zcont"></div>
+    <h3 id="ztit"></h3>
+    <p id="ztxt"></p>
+    <div class="nav"><button type="button" id="ant" aria-label="Detalhe anterior">‹</button><button type="button" id="prox" aria-label="Próximo detalhe">›</button><span>Trechos do livro</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="w">
+  <div class="cab2">
+   <div class="k">Por dentro</div>
+   <h2>Cada obra, o mesmo caminho.</h2>
+   <p>A história por trás, o mapa dos detalhes, o zoom em cada um e, no fim, o mistério que a pintura ainda guarda. Uns dez minutos de leitura por obra.</p>
+  </div>
+  <div class="pags"><figure><img src="img/pagina-abertura.jpg" alt="" loading="lazy" width="640" height="903"><figcaption>A abertura: a pintura inteira e a pergunta que move a obra.</figcaption></figure><figure><img src="img/pagina-mapa.jpg" alt="" loading="lazy" width="640" height="903"><figcaption>O mapa: cada detalhe escondido ganha um número.</figcaption></figure><figure><img src="img/pagina-zoom.jpg" alt="" loading="lazy" width="640" height="903"><figcaption>O zoom: chegamos perto e explicamos o que está ali.</figcaption></figure><figure><img src="img/pagina-misterio.jpg" alt="" loading="lazy" width="640" height="903"><figcaption>O mistério: o que se sabe e o que ninguém conseguiu explicar.</figcaption></figure></div>
+ </div>
+</section>
+
+<section>
+ <div class="w dois">
+  <div class="cab2">
+   <div class="k">O acervo</div>
+   <h2>As 30 obras.</h2>
+   <p>De Leonardo a Van Gogh, de Bosch a Klimt. Todas famosas, todas com algo a esconder.</p>
+  </div>
+  <ol class="lista"><li><span class="n">01</span><span class="t">Stańczyk</span><span class="a">Jan Matejko</span></li><li><span class="n">02</span><span class="t">Os Jogadores de Xadrez</span><span class="a">Moritz Retzsch</span></li><li><span class="n">03</span><span class="t">O Anjo Ferido</span><span class="a">Hugo Simberg</span></li><li><span class="n">04</span><span class="t">A Noite Estrelada</span><span class="a">Vincent van Gogh</span></li><li><span class="n">05</span><span class="t">Mona Lisa</span><span class="a">Leonardo da Vinci</span></li><li><span class="n">06</span><span class="t">O Grito</span><span class="a">Edvard Munch</span></li><li><span class="n">07</span><span class="t">Os Embaixadores</span><span class="a">Hans Holbein, o Jovem</span></li><li><span class="n">08</span><span class="t">O Casal Arnolfini</span><span class="a">Jan van Eyck</span></li><li><span class="n">09</span><span class="t">O Jardim das Delícias Terrenas</span><span class="a">Hieronymus Bosch</span></li><li><span class="n">10</span><span class="t">As Meninas</span><span class="a">Diego Velázquez</span></li><li><span class="n">11</span><span class="t">A Última Ceia</span><span class="a">Leonardo da Vinci</span></li><li><span class="n">12</span><span class="t">A Criação de Adão</span><span class="a">Michelangelo</span></li><li><span class="n">13</span><span class="t">Saturno Devorando um Filho</span><span class="a">Francisco de Goya</span></li><li><span class="n">14</span><span class="t">O Pesadelo</span><span class="a">Henry Fuseli</span></li><li><span class="n">15</span><span class="t">Moça com Brinco de Pérola</span><span class="a">Johannes Vermeer</span></li><li><span class="n">16</span><span class="t">O Triunfo da Morte</span><span class="a">Pieter Bruegel, o Velho</span></li><li><span class="n">17</span><span class="t">O Anjo Caído</span><span class="a">Alexandre Cabanel</span></li><li><span class="n">18</span><span class="t">A Ilha dos Mortos</span><span class="a">Arnold Böcklin</span></li><li><span class="n">19</span><span class="t">Judite Decapitando Holofernes</span><span class="a">Artemisia Gentileschi</span></li><li><span class="n">20</span><span class="t">Davi com a Cabeça de Golias</span><span class="a">Caravaggio</span></li><li><span class="n">21</span><span class="t">A Ronda Noturna</span><span class="a">Rembrandt</span></li><li><span class="n">22</span><span class="t">Paisagem com a Queda de Ícaro</span><span class="a">atribuída a Pieter Bruegel</span></li><li><span class="n">23</span><span class="t">Viajante sobre o Mar de Névoa</span><span class="a">Caspar David Friedrich</span></li><li><span class="n">24</span><span class="t">A Jangada da Medusa</span><span class="a">Théodore Géricault</span></li><li><span class="n">25</span><span class="t">A Morte de Marat</span><span class="a">Jacques-Louis David</span></li><li><span class="n">26</span><span class="t">Ofélia</span><span class="a">John Everett Millais</span></li><li><span class="n">27</span><span class="t">O Beijo</span><span class="a">Gustav Klimt</span></li><li><span class="n">28</span><span class="t">Autorretrato com a Orelha Enfaixada</span><span class="a">Vincent van Gogh</span></li><li><span class="n">29</span><span class="t">Lady Lilith</span><span class="a">Dante Gabriel Rossetti</span></li><li><span class="n">30</span><span class="t">Campo de Trigo com Corvos</span><span class="a">Vincent van Gogh</span></li></ol>
+ </div>
+</section>
+
+<section>
+ <div class="w">
+  <div class="cab2"><div class="k">Dúvidas</div><h2>Antes de comprar.</h2></div>
+  <div class="faq">
+   <details><summary>Preciso entender de arte?</summary><p>Não. O livro foi escrito para quem nunca estudou arte. Quando aparece uma palavra técnica, ela é explicada na mesma frase.</p></details>
+   <details><summary>Como recebo o e-book?</summary><p>A compra é feita pela Kiwify. Assim que o pagamento é aprovado, você recebe o acesso ao PDF no seu e-mail.</p></details>
+   <details><summary>Consigo ler no celular?</summary><p>Sim. É um PDF que abre no celular, no tablet e no computador. O sumário é clicável: toque no nome da obra e vá direto para ela.</p></details>
+   <details><summary>As informações são confiáveis?</summary><p>Cada obra foi pesquisada em museus, catálogos e estudos sobre o artista, e as fontes estão no fim de cada capítulo. Quando algo é interpretação e não fato, o texto avisa.</p></details>
+  </div>
+ </div>
+</section>
+
+<section class="fim">
+ <div class="w">
+  <h2>Depois deste livro, você não olha uma pintura do mesmo jeito.</h2>
+  <p class="l">30 obras, 372 páginas e 212 detalhes que quase ninguém percebe. Pagamento único, e o e-book é seu para sempre.</p>
+  <div class="por">Por apenas</div>
+  <div class="preco">R$ 27,90</div>
+  <div class="parc">à vista ou 6x de R$ 5,24 · acesso imediato ao PDF</div>
+  <a class="btn" href="https://pay.kiwify.com.br/UFSVO5i">Quero O Olhar do Corvo</a>
+  <div class="gar"><svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M9 1 1.5 4v5.5c0 4.6 3.2 8.6 7.5 9.5 4.3-.9 7.5-4.9 7.5-9.5V4L9 1Z" fill="none" stroke="#e0453a" stroke-width="1.6"/><path d="m5.5 10 2.4 2.4L12.6 7.6" fill="none" stroke="#e0453a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Garantia de 7 dias: se não gostar, seu dinheiro volta.</div>
+ </div>
+</section>
+
+<footer><div class="w"><span>© Corvo Cósmico · “A vida passa, a arte permanece.”</span><span>Imagens das obras em domínio público.</span></div></footer>
+
+<script>
+const OBRAS=[{"slug": "01-stanczyk", "titulo": "Stańczyk", "artista": "Jan Matejko", "ano": "1862", "img": "img/01-stanczyk.jpg", "r": 0.7433, "det": [{"n": 1, "titulo": "A festa que não para", "texto": "Pela porta aberta, à direita, aparece o baile: luz quente, roupas caras, casais da corte se divertindo. Repare que a luz da festa quase não entra no quarto. Matejko divide o quadro em dois mundos: lá, quem não quer saber de nada; aqui, quem já sabe demais.", "box": [0.79, 0.1, 0.99, 0.436], "z": "img/01-stanczyk-d1.jpg", "zr": 1.25}, {"n": 2, "titulo": "O anão e o alaúde", "texto": "Embaixo, de costas, está uma figura baixinha: um anão da corte, presença comum nos palácios da época. Ao lado dele aparece um alaúde, o instrumento da música e da festa. Para alguns estudiosos, o alaúde, símbolo de glória, carregado por um anão era o jeito de Matejko dizer que a glória da família real estava encolhendo.", "box": [0.78, 0.35, 0.96, 0.652], "z": "img/01-stanczyk-d2.jpg", "zr": 1.247}, {"n": 3, "titulo": "Um rosto emprestado", "texto": "Ninguém sabe como era o rosto do verdadeiro Stańczyk: não sobrou nenhum retrato dele. Então Matejko usou o próprio rosto. Esse bobo é, na verdade, um autorretrato do pintor, que se pintou mais velho e mais cansado do que era. É como se dissesse: eu também sou esse homem que enxerga o desastre.", "box": [0.45, 0.13, 0.59, 0.365], "z": "img/01-stanczyk-d3.jpg", "zr": 1.247}, {"n": 4, "titulo": "O medalhão no peito", "texto": "Por baixo da roupa vermelha aparece um pequeno medalhão religioso, com a imagem de Nossa Senhora de Częstochowa, a padroeira da Polônia. Não é o acessório que se espera de um palhaço. Nesse momento ele não está atuando. Está pensando, ou rezando, pelo seu país.", "box": [0.47, 0.356, 0.54, 0.474], "z": "img/01-stanczyk-d4.jpg", "zr": 1.253}, {"n": 5, "titulo": "A carta sobre a mesa", "texto": "Jogada entre outros papéis, está uma carta com selo de cera. Pela leitura mais comum, ela traz uma notícia terrível: Smolensk, uma fortaleza importantíssima na fronteira leste, caiu nas mãos de Moscou. Ninguém na festa parou por causa disso. Só o bobo leu, e entendeu. (E ela esconde mais uma coisa: guarde esta carta para o mistério do final.)", "box": [0.15, 0.405, 0.345, 0.551], "z": "img/01-stanczyk-d5.jpg", "zr": 0.557}, {"n": 6, "titulo": "A janela, a torre e o cometa", "texto": "Do outro lado do quarto, uma janela mostra a noite. Lá fora aparece a silhueta da torre da catedral de Wawel, em Cracóvia, onde os reis da Polônia eram coroados. E no canto do céu, um cometa risca a escuridão. Durante séculos, cometa foi sinal de desgraça. A coroa, a noite e um mau presságio: tudo do lado escuro da sala.", "box": [0.0, 0.0, 0.14, 0.235], "z": "img/01-stanczyk-d6.jpg", "zr": 1.249}, {"n": 7, "titulo": "O bastão largado no chão", "texto": "Quase sumindo na sombra está o bastão de bobo, a <em>marotte</em>: um cetro de brinquedo com uma cabecinha de palhaço na ponta. Era a ferramenta de trabalho de Stańczyk, usada para fazer graça. Ele largou o bastão no chão. Hoje não tem piada.", "box": [0.655, 0.75, 0.765, 0.935], "z": "img/01-stanczyk-d7.jpg", "zr": 1.251}, {"n": 8, "titulo": "O tapete amassado", "texto": "Olhe para os pés. O tapete está todo enrugado, como se ele tivesse desabado na poltrona de uma vez ao ler a carta, ou como se mexesse os pés de nervoso desde então. Um detalhe mínimo que transforma uma pose parada numa cena com antes e depois.", "box": [0.12, 0.715, 0.58, 0.996], "z": "img/01-stanczyk-d8.jpg", "zr": 0.454}]}, {"slug": "97-jogadores-de-xadrez", "titulo": "Os Jogadores de Xadrez", "artista": "Moritz Retzsch", "ano": "c. 1831", "img": "img/97-jogadores-de-xadrez.jpg", "r": 0.8007, "det": [{"n": 1, "titulo": "O diabo da pena vermelha", "texto": "À esquerda está o diabo, vestido como o Mefistófeles do teatro alemão: manto verde, bigode pontudo e uma pena vermelha no chapéu. Os textos da época dizem que é pena de galo, símbolo de esperteza e maldade. Repare na mão no queixo: para um autor da época, ela pode esconder um sorriso de vitória, ou medo de perder.", "box": [0.14, 0.24, 0.36, 0.55], "z": "img/97-jogadores-de-xadrez-d1.jpg", "zr": 1.129}, {"n": 2, "titulo": "A peça roubada", "texto": "Olhe para a mão do diabo sobre a mesa: os dedos compridos seguram uma figurinha branca que ele acaba de tirar do tabuleiro. Segundo a explicação publicada em 1837, é a Paz. Logo abaixo, as outras peças brancas já capturadas. O rapaz vem perdendo suas virtudes uma a uma.", "box": [0.28, 0.55, 0.43, 0.75], "z": "img/97-jogadores-de-xadrez-d2.jpg", "zr": 1.068}, {"n": 3, "titulo": "O anjo que não joga", "texto": "Atrás da mesa, numa luz azulada, está o anjo da guarda do rapaz. Mãos juntas, asas meio abertas, olhos baixos no tabuleiro. Ele não mexe em nada. O texto que acompanhava a gravura explica: como a consciência, o anjo só pode avisar e aconselhar. O diabo não consegue expulsá-lo. Só o próprio rapaz pode mandá-lo embora.", "box": [0.37, 0.14, 0.63, 0.55], "z": "img/97-jogadores-de-xadrez-d3.jpg", "zr": 1.262}, {"n": 4, "titulo": "A mão na testa", "texto": "Do outro lado está o rapaz, de roupa vermelha e cabelo cacheado. Ele apoia a testa na mão e encara o tabuleiro, como quem procura uma saída e não acha. A outra mão está parada na beira da mesa. É a vez dele de jogar. E ele parece já ter desistido.", "box": [0.62, 0.3, 0.92, 0.75], "z": "img/97-jogadores-de-xadrez-d4.jpg", "zr": 1.201}, {"n": 5, "titulo": "O exército dos vícios", "texto": "As peças pretas são do diabo. Segundo a explicação de 1837, o rei preto é ele mesmo: repare na figura de manto comprido, à esquerda. A rainha é o Prazer. Os outros são vícios: a Preguiça, o Orgulho, a Falsidade com um punhal escondido nas costas e a Incredulidade pisando numa cruz. Os peões são Dúvidas, com asas de morcego.", "box": [0.3562, 0.52, 0.6038, 0.69], "z": "img/97-jogadores-de-xadrez-d5.jpg", "zr": 0.55}, {"n": 6, "titulo": "O leão e a caveira", "texto": "O braço da cadeira do diabo é um leão de boca aberta. Os textos da época lembram um versículo da Bíblia: o diabo anda “como leão que ruge, procurando a quem devorar”. Desça os olhos: a pata do leão está sobre uma caveira. Segundo a mesma explicação, é o crânio de um adversário anterior, que perdeu a partida.", "box": [0.0, 0.48, 0.3203, 0.98], "z": "img/97-jogadores-de-xadrez-d6.jpg", "zr": 1.25}, {"n": 7, "titulo": "O que sobrou ao rapaz", "texto": "As peças brancas são virtudes e anjos. A figura alta de asas, com um braço erguido, faz parte do grupo que ainda protege o rei branco, que é a alma do rapaz. Pela explicação de época, a peça mais forte é a rainha, a Religião, e ainda estão de pé a Esperança e a Verdade.", "box": [0.56, 0.5, 0.71, 0.7], "z": "img/97-jogadores-de-xadrez-d7.jpg", "zr": 1.066}, {"n": 8, "titulo": "Uma mesa que é um túmulo", "texto": "O tabuleiro está sobre a tampa de um sarcófago, um caixão de pedra. Na frente, entre folhas douradas, há duas caveiras e, no meio, uma figurinha com as mãos no rosto: segundo o texto de época, é a alma tentando fugir da morte. Na borda da tampa, repare na aranha, que tece teias para prender as presas.", "box": [0.36, 0.75, 0.74, 0.99], "z": "img/97-jogadores-de-xadrez-d8.jpg", "zr": 0.505}]}, {"slug": "84-o-anjo-ferido", "titulo": "O Anjo Ferido", "artista": "Hugo Simberg", "ano": "1903", "img": "img/84-o-anjo-ferido.jpg", "r": 0.8047, "det": [{"n": 1, "titulo": "A venda e o cabelo", "texto": "Repare no rosto do anjo: uma faixa branca envolve a testa e cobre os olhos. O cabelo loiro cai sobre o rosto e a cabeça pende para a frente. Ela não reage, não olha. Parece cansada demais até para saber para onde a estão levando.", "box": [0.38, 0.17, 0.56, 0.42], "z": "img/84-o-anjo-ferido-d1.jpg", "zr": 1.118}, {"n": 2, "titulo": "Sangue na asa", "texto": "Olhe para a asa grande e branca. No meio dela há um risco avermelhado: sangue. É o único sinal claro da ferida. Não sabemos o que aconteceu. Simberg não pintou a queda nem o culpado, só o depois.", "box": [0.54, 0.18, 0.7, 0.46], "z": "img/84-o-anjo-ferido-d2.jpg", "zr": 1.409}, {"n": 3, "titulo": "O menino que olha para nós", "texto": "O menino de trás, de camisa marrom, é o único que olha para fora do quadro, direto para quem está vendo. A cara é séria, quase desconfiada. Para alguns estudiosos, como Satu Itkonen, esse olhar puxa o espectador para dentro da cena: o que acontece ali diz respeito a todos nós. Para outros, é só o olhar de um menino que se sente observado.", "box": [0.72, 0.0, 0.94, 0.42], "z": "img/84-o-anjo-ferido-d3.jpg", "zr": 1.536}, {"n": 4, "titulo": "O menino de preto", "texto": "O menino da frente vai de roupa e chapéu pretos, cabeça baixa, como num enterro. Ele não olha para trás. Numa leitura comum, a roupa escura faz dele um símbolo da morte. Mas também pode ser só um garoto pobre de Helsinque, com a sua melhor roupa.", "box": [0.033, 0.1, 0.387, 0.65], "z": "img/84-o-anjo-ferido-d4.jpg", "zr": 1.25}, {"n": 5, "titulo": "Galantos na mão", "texto": "Na mão direita, o anjo segura um raminho de flores brancas e pequenas: galantos (em inglês, <em>snowdrops</em>, gotas de neve). São das primeiras flores a nascer no fim do inverno, ainda com neve. Por isso são lidas como sinal de cura e de renascimento.", "box": [0.2483, 0.5, 0.5117, 0.68], "z": "img/84-o-anjo-ferido-d5.jpg", "zr": 0.55}, {"n": 6, "titulo": "A baía de Töölö", "texto": "No fundo, a água e a margem distante são um lugar real: a baía de Töölö, no parque Eläintarha, em Helsinque. Na época, havia ali uma escola para meninas cegas e um lar para pessoas com deficiência. Para muitos, os meninos levam o anjo para lá.", "box": [0.0, 0.0, 0.5, 0.32], "z": "img/84-o-anjo-ferido-d6.jpg", "zr": 0.516}, {"n": 7, "titulo": "Pés descalços", "texto": "Embaixo da maca, os pés do anjo balançam no ar, descalços e pálidos, sem tocar o chão. Compare com as botas grandes e gastas dos meninos, firmes na terra. Um ser do céu, levado por duas crianças bem pé no chão.", "box": [0.36, 0.66, 0.6, 1.0], "z": "img/84-o-anjo-ferido-d7.jpg", "zr": 1.139}]}];
+let o=0,d=0;
+const $=id=>document.getElementById(id);
+function pinta(){
+ const ob=OBRAS[o],dt=ob.det[d],q=$('quadro');
+ q.querySelectorAll('.pt').forEach(p=>p.classList.toggle('on',+p.dataset.d===d));
+ const [x0,y0,x1,y1]=dt.box,c=$('caixa');
+ c.style.left=x0*100+'%';c.style.top=y0*100+'%';c.style.width=(x1-x0)*100+'%';c.style.height=(y1-y0)*100+'%';
+ const z=$('zimg');z.src=dt.z;z.alt='Detalhe: '+dt.titulo;z.style.setProperty('--zr',1/dt.zr);z.style.aspectRatio=(1/dt.zr).toFixed(3);
+ $('zcont').textContent='Detalhe '+dt.n+' de '+ob.det.length;$('ztit').textContent=dt.titulo;$('ztxt').innerHTML=dt.texto;
+}
+function abre(k){
+ o=k;d=0;const ob=OBRAS[o],q=$('quadro');
+ document.querySelectorAll('.aba').forEach(b=>b.setAttribute('aria-selected',+b.dataset.o===o));
+ const im=$('qimg');im.src=ob.img;im.alt=ob.titulo+', '+ob.artista;
+ q.querySelectorAll('.pt').forEach(p=>p.remove());
+ ob.det.forEach((dt,i)=>{const [x0,y0,x1,y1]=dt.box,b=document.createElement('button');b.type='button';b.className='pt';b.dataset.d=i;b.textContent=dt.n;
+  b.style.left=((x0+x1)/2*100)+'%';b.style.top=((y0+y1)/2*100)+'%';b.setAttribute('aria-label','Detalhe '+dt.n+': '+dt.titulo);
+  b.onclick=()=>{d=i;pinta()};q.appendChild(b)});
+ $('qleg').textContent=ob.titulo+' – '+ob.artista+' – '+ob.ano;
+ pinta();
+}
+function limpo(v){$('quadro').classList.toggle('limpo',v);const b=$('orig');b.setAttribute('aria-pressed',v);b.textContent=v?'Ver os detalhes':'Ver pintura original'}
+$('orig').onclick=()=>limpo(!$('quadro').classList.contains('limpo'));
+document.querySelectorAll('.aba').forEach(b=>b.onclick=()=>{limpo(false);abre(+b.dataset.o)});
+$('prox').onclick=()=>{d=(d+1)%OBRAS[o].det.length;pinta()};
+$('ant').onclick=()=>{d=(d-1+OBRAS[o].det.length)%OBRAS[o].det.length;pinta()};
+const m=location.hash.match(/teste=(\d+)-(\d+)/);
+abre(m?+m[1]:0);if(m){d=+m[2];pinta()}if(/orig/.test(location.hash))limpo(true);
+</script>
+</body>
+</html>
