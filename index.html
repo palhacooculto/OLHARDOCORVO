@@ -11,21 +11,23 @@
 <meta property="og:title" content="O Olhar do Corvo">
 <meta property="og:description" content="30 pinturas intrigantes e os segredos que quase ninguém vê.">
 <meta property="og:image" content="img/capa.jpg">
-<link rel="preload" href="fonts/Texturina-VF.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/Anton-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="img/mockup.webp" as="image">
 <style>
 @font-face{font-family:'Titulo';src:url('fonts/Texturina-VF.ttf');font-weight:100 900;font-display:swap}
 @font-face{font-family:'Corpo';src:url('fonts/Inter-VF.ttf');font-weight:100 900;font-display:swap}
-:root{--bg:#0f0c0c;--bg2:#161212;--ink:#ece3d6;--soft:#bdb2a6;--mut:#857a70;--line:#2a2322;--red:#c42020;--red2:#e0453a}
+@font-face{font-family:'Gigante';src:url('fonts/Anton-Regular.ttf');font-display:swap}
+:root{--bg:#111;--bg2:#181716;--ink:#f3ede4;--soft:#c2b9ae;--mut:#8a8178;--line:#2b2826;--red:#ff1a1f;--red2:#ff1a1f}
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--bg);scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Corpo',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:'Corpo',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit}
 .w{width:min(1120px,100% - 48px);margin:0 auto}
 h1,h2,.serif{font-family:'Titulo',Georgia,serif;font-weight:600;line-height:1.08;letter-spacing:-.01em}
 .k{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--red2);font-weight:600}
-.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:16px 30px;border-radius:2px;transition:background .15s}
-.btn:hover{background:#a51a1a}
+.btn{display:inline-block;background:var(--ink);color:#111;text-decoration:none;font-weight:800;font-size:16px;padding:16px 30px;border-radius:0;transition:background .15s,color .15s}
+.btn:hover{background:var(--red);color:#fff}
 .btn{position:relative;overflow:hidden;isolation:isolate}
 .btn::after{content:'';position:absolute;top:-20%;bottom:-20%;left:0;width:38%;z-index:-1;pointer-events:none;
  background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.08) 30%,rgba(255,240,225,.75) 50%,rgba(255,255,255,.08) 70%,transparent 100%);
@@ -38,25 +40,32 @@ section{padding:110px 0;border-top:1px solid var(--line)}
 
 /* topo */
 .topo{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
-.topo .marca{font-family:'Titulo';font-size:20px;font-weight:600;text-decoration:none}
+.topo .marca{font-family:'Gigante';font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--red2);text-decoration:none}
 .topo a.lk{font-size:14px;color:var(--soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
 .topo a.lk:hover{color:var(--ink);border-color:var(--red)}
 
 /* abertura */
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:72px;align-items:center;padding:56px 0 110px}
-.hero h1{font-size:clamp(40px,5.4vw,66px);margin:18px 0 22px}
-.hero p.l{font-size:19px;color:var(--soft);max-width:30em;margin-bottom:34px}
-.hero .capa{justify-self:end;width:100%;height:auto;max-width:400px;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;padding:40px 0 80px}
+.hero .mock{justify-self:center;position:relative;left:-50px;width:100%;max-width:400px;height:auto;transform-origin:50% 50%;animation:flutua 6s ease-in-out infinite;will-change:transform;filter:drop-shadow(0 40px 40px rgba(0,0,0,.85))}
+.hero .htx{max-width:580px}
+.hero h1{font-size:clamp(34px,4.4vw,56px);line-height:1.08;margin:0 0 20px}
+.hero p.l{font-size:18px;color:var(--soft);max-width:30em;margin-bottom:30px}
+.tkw{overflow:hidden;padding:26px 0 60px}
+.tk{background:var(--red);color:#111;transform:rotate(-2deg);margin:0 -40px;padding:16px 0;overflow:hidden;white-space:nowrap}
+.tk .row{display:inline-block;font-family:'Gigante';font-size:clamp(28px,3.4vw,44px);letter-spacing:.04em;text-transform:uppercase;animation:corre 70s linear infinite}
+@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes corre{to{transform:translateX(-50%)}}
 .fatos{display:flex;gap:28px;margin-top:40px;font-size:14px;color:var(--mut)}
-.fatos b{display:block;font-family:'Titulo';font-size:26px;color:var(--ink);font-weight:600;line-height:1.1}
+.fatos b{display:block;font-family:'Gigante';font-size:34px;color:var(--ink);font-weight:400;line-height:1.1;letter-spacing:.01em}
 
 /* olhe de perto */
-.cab2{max-width:640px;margin-bottom:40px}
-.cab2 h2{font-size:clamp(32px,4vw,46px);margin:12px 0 14px}
+.cab2{max-width:760px;margin-bottom:40px}
+.cab2 h2{font-family:'Gigante';font-weight:400;text-transform:uppercase;font-size:clamp(52px,7.5vw,104px);line-height:.92;letter-spacing:.005em;margin:12px 0 18px}
+.cab2 h2 span{color:var(--red)}
 .cab2 p{color:var(--soft)}
 .abas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
 .aba{font:inherit;font-size:14px;background:none;color:var(--soft);border:1px solid var(--line);padding:9px 16px;cursor:pointer;border-radius:2px}
-.aba[aria-selected=true]{color:var(--ink);border-color:var(--red)}
+.aba[aria-selected=true]{color:#fff;background:var(--red);border-color:var(--red)}
 .aba:hover{color:var(--ink)}
 .perto{display:grid;grid-template-columns:1.45fr 1fr;gap:36px;align-items:start}
 .quadro{position:relative;background:#000;line-height:0;overflow:hidden}
@@ -71,16 +80,17 @@ section{padding:110px 0;border-top:1px solid var(--line)}
 .quadro.limpo .pt,.quadro.limpo .caixa{opacity:0;pointer-events:none}
 .pt,.caixa{transition:opacity .25s,transform .15s,background .15s,left .35s,top .35s,width .35s,height .35s}
 .compra .btn{text-transform:uppercase;letter-spacing:.08em;font-size:15px;padding:18px 34px}
-.compra .lin{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:18px 0 4px}
-.compra .preco{font-family:'Titulo';font-weight:700;font-size:44px;line-height:1;color:var(--ink);animation:brilho 3.2s ease-in-out infinite}
-@keyframes brilho{0%,100%{text-shadow:0 0 0 rgba(224,69,58,0)}50%{text-shadow:0 0 14px rgba(224,69,58,.75),0 0 30px rgba(224,69,58,.35)}}
-@keyframes brilho2{0%,100%{text-shadow:0 0 6px rgba(224,69,58,.25)}50%{text-shadow:0 0 18px rgba(224,69,58,.9),0 0 42px rgba(224,69,58,.45)}}
+.compra .lin{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);margin:18px 0 4px}
+.compra .preco{font-family:'Gigante';font-weight:400;font-size:52px;line-height:1;color:var(--red2);animation:brilho 3.2s ease-in-out infinite}
+@keyframes brilho{0%,100%{text-shadow:0 0 0 rgba(255,26,31,0)}50%{text-shadow:0 0 14px rgba(255,26,31,.75),0 0 30px rgba(255,26,31,.35)}}
+@keyframes brilho2{0%,100%{text-shadow:0 0 6px rgba(255,26,31,.25)}50%{text-shadow:0 0 18px rgba(255,26,31,.9),0 0 42px rgba(255,26,31,.45)}}
 .compra .parc{font-size:14px;color:var(--soft);margin-top:6px}
 .fim{text-align:center;padding:130px 0 120px}
-.fim h2{font-size:clamp(32px,4.2vw,50px);max-width:16em;margin:0 auto 18px}
+.fim h2{font-family:'Gigante';font-weight:400;text-transform:uppercase;font-size:clamp(48px,7vw,96px);line-height:.94;max-width:11em;margin:0 auto 24px}
+.fim h2 span{color:var(--red)}
 .fim p.l{color:var(--soft);max-width:34em;margin:0 auto 40px}
 .fim .por{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
-.fim .preco{font-family:'Titulo';font-weight:700;font-size:64px;line-height:1.05;color:var(--red2);margin:6px 0 4px;animation:brilho2 3.2s ease-in-out infinite}
+.fim .preco{font-family:'Gigante';font-weight:400;font-size:84px;line-height:1.05;color:var(--red2);margin:6px 0 4px;animation:brilho2 3.2s ease-in-out infinite}
 .fim .parc{font-size:14px;color:var(--soft);margin-bottom:34px}
 .fim .btn{text-transform:uppercase;letter-spacing:.08em;font-size:15px;padding:20px 40px}
 .fim .gar{display:flex;gap:10px;align-items:center;justify-content:center;font-size:14px;color:var(--soft);margin-top:22px}
@@ -105,7 +115,7 @@ section{padding:110px 0;border-top:1px solid var(--line)}
 .dois{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px}
 .lista{list-style:none;columns:2;column-gap:40px}
 .lista li{break-inside:avoid;display:grid;grid-template-columns:32px 1fr;padding:9px 0;border-bottom:1px solid var(--line)}
-.lista .n{color:var(--red2);font-size:13px;font-weight:600;padding-top:2px}
+.lista .n{color:var(--red2);font-family:'Gigante';font-size:18px;line-height:1.3}
 .lista .t{font-size:15px}.lista .a{grid-column:2;font-size:13px;color:var(--mut)}
 
 /* faq */
@@ -127,8 +137,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 @media (max-width:900px){
  section{padding:76px 0}
- .hero{grid-template-columns:1fr;gap:44px;padding:28px 0 76px}
- .hero .capa{justify-self:center;max-width:300px;order:-1}
+ .hero{gap:28px;padding:24px 0 56px}
  .perto{grid-template-columns:1fr}
  .pags{grid-template-columns:repeat(2,1fr)}
  .dois{grid-template-columns:1fr;gap:28px}
@@ -137,19 +146,21 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media (max-width:560px){
  body{font-size:16px}.w{width:calc(100% - 36px)}
  .lista{columns:1}
+ .hero{grid-template-columns:1fr;gap:20px;padding:10px 0 50px}
+ .hero .mock{grid-row:1;width:min(60%,260px);left:0}
  .pt{width:28px;height:28px;margin:-14px 0 0 -14px;font-size:12px}
  .fatos{gap:20px}
  .btn{display:block;text-align:center}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.tk .row,.hero .mock{animation:none}}
 </style>
 </head>
 <body>
 
-<div class="w topo"><a class="marca" href="#">O Olhar do Corvo</a><a class="lk" href="https://pay.kiwify.com.br/UFSVO5i">Comprar o e-book</a></div>
+<div class="w topo"><a class="marca" href="#">O Olhar do Corvo</a></div>
 
 <header class="w hero">
- <div>
+ <div class="htx">
   <h1>Toda pintura famosa esconde alguma coisa.</h1>
   <p class="l">30 obras explicadas sem palavras difíceis: a história por trás de cada uma e os detalhes que passam batido, apontados um por um.</p>
   <div class="compra">
@@ -158,16 +169,16 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
    <div class="preco">R$ 27,90</div>
    <div class="parc">ou 6x de R$ 5,24</div>
   </div>
-  <div class="fatos"><div><b>30</b>pinturas</div><div><b>372</b>páginas</div><div><b>212</b>detalhes que quase ninguém percebe</div></div>
  </div>
- <img class="capa" src="img/capa.jpg" alt="Capa do e-book O Olhar do Corvo" width="900" height="1270">
+ <img class="mock" src="img/mockup.webp" alt="O e-book O Olhar do Corvo" width="900" height="1127">
 </header>
+<div class="tkw" aria-hidden="true"><div class="tk"><span class="row">STAŃCZYK ✶ OS JOGADORES DE XADREZ ✶ O ANJO FERIDO ✶ A NOITE ESTRELADA ✶ MONA LISA ✶ O GRITO ✶ OS EMBAIXADORES ✶ O CASAL ARNOLFINI ✶ O JARDIM DAS DELÍCIAS TERRENAS ✶ AS MENINAS ✶ A ÚLTIMA CEIA ✶ A CRIAÇÃO DE ADÃO ✶ SATURNO DEVORANDO UM FILHO ✶ O PESADELO ✶ MOÇA COM BRINCO DE PÉROLA ✶ O TRIUNFO DA MORTE ✶ O ANJO CAÍDO ✶ A ILHA DOS MORTOS ✶ JUDITE DECAPITANDO HOLOFERNES ✶ DAVI COM A CABEÇA DE GOLIAS ✶ A RONDA NOTURNA ✶ PAISAGEM COM A QUEDA DE ÍCARO ✶ VIAJANTE SOBRE O MAR DE NÉVOA ✶ A JANGADA DA MEDUSA ✶ A MORTE DE MARAT ✶ OFÉLIA ✶ O BEIJO ✶ AUTORRETRATO COM A ORELHA ENFAIXADA ✶ LADY LILITH ✶ CAMPO DE TRIGO COM CORVOS ✶ STAŃCZYK ✶ OS JOGADORES DE XADREZ ✶ O ANJO FERIDO ✶ A NOITE ESTRELADA ✶ MONA LISA ✶ O GRITO ✶ OS EMBAIXADORES ✶ O CASAL ARNOLFINI ✶ O JARDIM DAS DELÍCIAS TERRENAS ✶ AS MENINAS ✶ A ÚLTIMA CEIA ✶ A CRIAÇÃO DE ADÃO ✶ SATURNO DEVORANDO UM FILHO ✶ O PESADELO ✶ MOÇA COM BRINCO DE PÉROLA ✶ O TRIUNFO DA MORTE ✶ O ANJO CAÍDO ✶ A ILHA DOS MORTOS ✶ JUDITE DECAPITANDO HOLOFERNES ✶ DAVI COM A CABEÇA DE GOLIAS ✶ A RONDA NOTURNA ✶ PAISAGEM COM A QUEDA DE ÍCARO ✶ VIAJANTE SOBRE O MAR DE NÉVOA ✶ A JANGADA DA MEDUSA ✶ A MORTE DE MARAT ✶ OFÉLIA ✶ O BEIJO ✶ AUTORRETRATO COM A ORELHA ENFAIXADA ✶ LADY LILITH ✶ CAMPO DE TRIGO COM CORVOS ✶ </span></div></div>
 
 <section id="perto">
  <div class="w">
   <div class="cab2">
    <div class="k">Experimente</div>
-   <h2>Olhe de perto.</h2>
+   <h2>Chegue mais <span>perto.</span></h2>
    <p>Toque nos números. É assim que o livro mostra cada obra: um detalhe de cada vez, com o zoom e a explicação do que está ali.</p>
   </div>
   <div class="abas" role="tablist"><button type="button" class="aba" data-o="0" aria-selected="true">Stańczyk</button><button type="button" class="aba" data-o="1" aria-selected="false">Os Jogadores de Xadrez</button><button type="button" class="aba" data-o="2" aria-selected="false">O Anjo Ferido</button></div>
@@ -192,7 +203,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
  <div class="w">
   <div class="cab2">
    <div class="k">Por dentro</div>
-   <h2>Cada obra, o mesmo caminho.</h2>
+   <h2>Cada obra, o mesmo <span>caminho.</span></h2>
    <p>A história por trás, o mapa dos detalhes, o zoom em cada um e, no fim, o mistério que a pintura ainda guarda. Uns dez minutos de leitura por obra.</p>
   </div>
   <div class="pags"><figure><img src="img/pagina-abertura.jpg" alt="" loading="lazy" width="640" height="903"><figcaption>A abertura: a pintura inteira e a pergunta que move a obra.</figcaption></figure><figure><img src="img/pagina-mapa.jpg" alt="" loading="lazy" width="640" height="903"><figcaption>O mapa: cada detalhe escondido ganha um número.</figcaption></figure><figure><img src="img/pagina-zoom.jpg" alt="" loading="lazy" width="640" height="903"><figcaption>O zoom: chegamos perto e explicamos o que está ali.</figcaption></figure><figure><img src="img/pagina-misterio.jpg" alt="" loading="lazy" width="640" height="903"><figcaption>O mistério: o que se sabe e o que ninguém conseguiu explicar.</figcaption></figure></div>
@@ -203,7 +214,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
  <div class="w dois">
   <div class="cab2">
    <div class="k">O acervo</div>
-   <h2>As 30 obras.</h2>
+   <h2>As <span>30</span> obras.</h2>
    <p>De Leonardo a Van Gogh, de Bosch a Klimt. Todas famosas, todas com algo a esconder.</p>
   </div>
   <ol class="lista"><li><span class="n">01</span><span class="t">Stańczyk</span><span class="a">Jan Matejko</span></li><li><span class="n">02</span><span class="t">Os Jogadores de Xadrez</span><span class="a">Moritz Retzsch</span></li><li><span class="n">03</span><span class="t">O Anjo Ferido</span><span class="a">Hugo Simberg</span></li><li><span class="n">04</span><span class="t">A Noite Estrelada</span><span class="a">Vincent van Gogh</span></li><li><span class="n">05</span><span class="t">Mona Lisa</span><span class="a">Leonardo da Vinci</span></li><li><span class="n">06</span><span class="t">O Grito</span><span class="a">Edvard Munch</span></li><li><span class="n">07</span><span class="t">Os Embaixadores</span><span class="a">Hans Holbein, o Jovem</span></li><li><span class="n">08</span><span class="t">O Casal Arnolfini</span><span class="a">Jan van Eyck</span></li><li><span class="n">09</span><span class="t">O Jardim das Delícias Terrenas</span><span class="a">Hieronymus Bosch</span></li><li><span class="n">10</span><span class="t">As Meninas</span><span class="a">Diego Velázquez</span></li><li><span class="n">11</span><span class="t">A Última Ceia</span><span class="a">Leonardo da Vinci</span></li><li><span class="n">12</span><span class="t">A Criação de Adão</span><span class="a">Michelangelo</span></li><li><span class="n">13</span><span class="t">Saturno Devorando um Filho</span><span class="a">Francisco de Goya</span></li><li><span class="n">14</span><span class="t">O Pesadelo</span><span class="a">Henry Fuseli</span></li><li><span class="n">15</span><span class="t">Moça com Brinco de Pérola</span><span class="a">Johannes Vermeer</span></li><li><span class="n">16</span><span class="t">O Triunfo da Morte</span><span class="a">Pieter Bruegel, o Velho</span></li><li><span class="n">17</span><span class="t">O Anjo Caído</span><span class="a">Alexandre Cabanel</span></li><li><span class="n">18</span><span class="t">A Ilha dos Mortos</span><span class="a">Arnold Böcklin</span></li><li><span class="n">19</span><span class="t">Judite Decapitando Holofernes</span><span class="a">Artemisia Gentileschi</span></li><li><span class="n">20</span><span class="t">Davi com a Cabeça de Golias</span><span class="a">Caravaggio</span></li><li><span class="n">21</span><span class="t">A Ronda Noturna</span><span class="a">Rembrandt</span></li><li><span class="n">22</span><span class="t">Paisagem com a Queda de Ícaro</span><span class="a">atribuída a Pieter Bruegel</span></li><li><span class="n">23</span><span class="t">Viajante sobre o Mar de Névoa</span><span class="a">Caspar David Friedrich</span></li><li><span class="n">24</span><span class="t">A Jangada da Medusa</span><span class="a">Théodore Géricault</span></li><li><span class="n">25</span><span class="t">A Morte de Marat</span><span class="a">Jacques-Louis David</span></li><li><span class="n">26</span><span class="t">Ofélia</span><span class="a">John Everett Millais</span></li><li><span class="n">27</span><span class="t">O Beijo</span><span class="a">Gustav Klimt</span></li><li><span class="n">28</span><span class="t">Autorretrato com a Orelha Enfaixada</span><span class="a">Vincent van Gogh</span></li><li><span class="n">29</span><span class="t">Lady Lilith</span><span class="a">Dante Gabriel Rossetti</span></li><li><span class="n">30</span><span class="t">Campo de Trigo com Corvos</span><span class="a">Vincent van Gogh</span></li></ol>
@@ -212,7 +223,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 <section>
  <div class="w">
-  <div class="cab2"><div class="k">Dúvidas</div><h2>Antes de comprar.</h2></div>
+  <div class="cab2"><div class="k">Dúvidas</div><h2>Antes de <span>comprar.</span></h2></div>
   <div class="faq">
    <details><summary>Preciso entender de arte?</summary><p>Não. O livro foi escrito para quem nunca estudou arte. Quando aparece uma palavra técnica, ela é explicada na mesma frase.</p></details>
    <details><summary>Como recebo o e-book?</summary><p>A compra é feita pela Kiwify. Assim que o pagamento é aprovado, você recebe o acesso ao PDF no seu e-mail.</p></details>
@@ -224,13 +235,13 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 <section class="fim">
  <div class="w">
-  <h2>Depois deste livro, você não olha uma pintura do mesmo jeito.</h2>
+  <h2>Depois deste livro, você não olha uma pintura do <span>mesmo jeito.</span></h2>
   <p class="l">30 obras, 372 páginas e 212 detalhes que quase ninguém percebe. Pagamento único, e o e-book é seu para sempre.</p>
   <div class="por">Por apenas</div>
   <div class="preco">R$ 27,90</div>
   <div class="parc">à vista ou 6x de R$ 5,24 · acesso imediato ao PDF</div>
   <a class="btn" href="https://pay.kiwify.com.br/UFSVO5i">Quero O Olhar do Corvo</a>
-  <div class="gar"><svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M9 1 1.5 4v5.5c0 4.6 3.2 8.6 7.5 9.5 4.3-.9 7.5-4.9 7.5-9.5V4L9 1Z" fill="none" stroke="#e0453a" stroke-width="1.6"/><path d="m5.5 10 2.4 2.4L12.6 7.6" fill="none" stroke="#e0453a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Garantia de 7 dias: se não gostar, seu dinheiro volta.</div>
+  <div class="gar"><svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M9 1 1.5 4v5.5c0 4.6 3.2 8.6 7.5 9.5 4.3-.9 7.5-4.9 7.5-9.5V4L9 1Z" fill="none" stroke="#ff1a1f" stroke-width="1.6"/><path d="m5.5 10 2.4 2.4L12.6 7.6" fill="none" stroke="#ff1a1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Garantia de 7 dias: se não gostar, seu dinheiro volta.</div>
  </div>
 </section>
 
